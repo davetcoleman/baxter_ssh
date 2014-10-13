@@ -27,8 +27,8 @@ A C++ version of the Baxter SDK that works along side the Rethink SDK. This is t
    * cmake_modules
    * control_toolbox
    * realtime_tools
-   * ros_control
-   * ros_controllers
+   * ros_control -b all_dev_combined
+   * ros_controllers -b indigo_to_groovy_backport
    * xacro
 
 
