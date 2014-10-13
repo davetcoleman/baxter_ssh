@@ -21,7 +21,17 @@ A C++ version of the Baxter SDK that works along side the Rethink SDK. This is t
     cd ~/ros/ws_baxter/src
     ```
 
-* TODO FINISH THIS
+* Install the following on Baxter:
+
+   * baxter_common
+   * cmake_modules
+   * control_toolbox
+   * realtime_tools
+   * ros_control
+   * ros_controllers
+   * xacro
+
+
 
 ## Bringup Baxter
 
