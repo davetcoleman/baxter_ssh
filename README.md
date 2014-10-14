@@ -1,4 +1,4 @@
-baxter_ros_control
+Baxter SSH - Run Inside Baxter
 ======
 
 A C++ version of the Baxter SDK that works along side the Rethink SDK. This is the base package that contains a ros_control implementation of the Baxter controllers, and it is intended to run on Baxter itself
@@ -99,6 +99,48 @@ This Baxter repository uses [ros_control](http://wiki.ros.org/ros_control) to se
 
  * Left shoulder button: enable Baxter
  * Right shoulder button: disable Baxter
+
+## Installing Other Software on Baxter
+
+Some helpful notes for setting up your Baxter to be more useful. Its suggested you place all software in a folder ``software``
+
+    cd ~
+    mkdir software
+
+### Install emacs
+
+    wget SOME-MIRROR/emacs-24.3.tar.xz                                                                                                                                                                                                                                            
+    tar xvfJ emacs-24.3.tar.xz                                                                                                                                                                                                                                                    
+    cd emacs-24.3                                                                                                                                                                                                                                                                 
+    ./configure --with-gif=no                                                                                                                                                                                                                                                     
+    make                                                                                                                                                                                                                                                                          
+
+Add to PATH:
+
+    export PATH=$PATH:/home/ruser/software/emacs-24.3/lib-src/
+    export PATH=$PATH:/home/ruser/software/emacs-24.3/src/
+
+### Install colordiff
+
+    wget http://www.colordiff.org/colordiff-1.0.13.tar.gz
+    tar xvfz colordiff-1.0.13.tar.gz
+    cd colordiff-1.0.13
+    mkdir ~/bin ~/man ~/etc
+
+Edit Makefile to say first three lines:
+
+     INSTALL_DIR=~/bin
+     MAN_DIR=~/man/man1
+     ETC_DIR=~/etc
+
+Install - The script will complain about changing ownership of colordiffrc - ignore the error.
+    
+     make install
+
+Add to PATH in .bashrc
+
+     export PATH=$PATH:/home/ruser/bin
+
 
 ## License
 
