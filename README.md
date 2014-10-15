@@ -31,15 +31,15 @@ A C++ version of the Baxter SDK that works along side the Rethink SDK. This is t
 
    * xacro
    * cmake_modules -b master
-   * control_toolbox 
-   * realtime_tools
+   * control_toolbox -b indigo-devel
+   * realtime_tools -b indigo-devel
    * ros_control -b all_dev_combined
    * ros_controllers -b indigo_to_groovy_backport
    * baxter_common -b master
-   * baxter_ssh
+   * baxter_ssh -b indigo-devel
+   * control_msgs -b indigo-devel
 
 * Build & Source
-
 
 ## Bringup Baxter
 
@@ -138,6 +138,19 @@ Install - The script will complain about changing ownership of colordiffrc - ign
 Add to PATH in .bashrc
 
      export PATH=$PATH:/home/ruser/bin
+
+### Install catkin_tools
+
+First edit your .bashrc and add:
+
+     export PYTHONPATH="/home/ruser/bin/catkin_tools/lib/python2.7/site-packages:$PYTHONPATH"
+
+Source your .bashrc then
+
+     cd ~/ros
+     git clone https://github.com/catkin/catkin_tools.git
+     cd catkin_tools/
+     python setup.py install --prefix ~/bin/catkin_tools
 
 
 ## License
