@@ -14,6 +14,12 @@ A C++ version of the Baxter SDK that works along side the Rethink SDK. This is t
     
 ## Installation
 
+* SSH into Baxter
+
+    http://sdk.rethinkrobotics.com/wiki/SSH
+
+* Install [other software](Installing Other Software on Baxter)
+
 * Create a catkin workspace if you don't already have one (we recommend a separate one for Baxter) 
 
     ```
@@ -23,31 +29,23 @@ A C++ version of the Baxter SDK that works along side the Rethink SDK. This is t
 
 * Install the following on Baxter:
 
-   * baxter_common
-   * cmake_modules
-   * control_toolbox
+   * xacro
+   * cmake_modules -b master
+   * control_toolbox 
    * realtime_tools
    * ros_control -b all_dev_combined
    * ros_controllers -b indigo_to_groovy_backport
-   * xacro
+   * baxter_common -b master
+   * baxter_ssh
 
+* Build & Source
 
 
 ## Bringup Baxter
 
-### Hardware
+### Enable controllers
 
- * Power on baxter
-
- * Ensure you have the correct ROS_MASTER_URI exported, this depends on your robot serial number. Mine is:
-   ```
-   export ROS_MASTER_URI=http://011305P0009.local:11311
-   ```
-
-   You might also need to set the ROS hostname environment variable if you have not already done so and you have communication issues:
-   ```
-   export ROS_HOSTNAME=128.138.244.72  # REPLACE WITH YOUR COMPUTER'S IP ADDRESS
-   ```
+ * Power on baxter and SSH in
 
  * Bringup ros_control controllers - starts a position-based trajectory controller. See [Hardware Control Modes](#hardware-control-modes) for other control modes
    ```
