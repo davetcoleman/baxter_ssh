@@ -1,0 +1,5 @@
+- git: {local-name: baxter_ssh, uri: 'https://github.com/davetcoleman/baxter_ssh.git', version: indigo-devel}
+- git: {local-name: baxter_common, uri: 'https://github.com/davetcoleman/baxter_common.git', version: cu_robot_sdkv1_fingers}
+- git: {local-name: ros_controllers, uri: 'https://github.com/davetcoleman/ros_controllers.git', version: indigo_joint_mode_controller}
+- git: {local-name: ros_control, uri: 'https://github.com/davetcoleman/ros_control.git', version: joint_mode_controller_indigo}
+
