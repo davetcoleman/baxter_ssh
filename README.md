@@ -11,35 +11,57 @@ A C++ version of the Baxter SDK that works along side the Rethink SDK. This is t
 ## Prerequisites
 
  * A Baxter with dual parallel electric grippers with SDK v1.0.0 installed
-    
+
 ## Installation
 
-* SSH into Baxter
+* Two options of where to setup baxter_cpp
 
-    http://sdk.rethinkrobotics.com/wiki/SSH
+  * Option 1: SSH into Baxter
 
-* Install [other software](Installing Other Software on Baxter)
+    * See http://sdk.rethinkrobotics.com/wiki/SSH
 
-* Create a catkin workspace if you don't already have one (we recommend a separate one for Baxter) 
+    * Install other software tools if desired - see section "Installing Other Software on Baxter"
+
+    * Install missing depenencies for Groovy (this is only if running on Baxter itself)
+
+       * xacro
+       * cmake_modules -b master
+       * control_toolbox -b indigo-devel
+       * realtime_tools -b indigo-devel
+	   * control_msgs -b indigo-devel
+	   * wstool
+
+  * Option 2: Install on developer machine
+
+     Just continue on...
+
+* Create a catkin workspace if you don't already have one (we recommend a separate one for Baxter)
 
     ```
     mkdir -p ~/ros/ws_baxter/src
     cd ~/ros/ws_baxter/src
+	wstool init .
     ```
 
-* Install the following on Baxter:
+* Install these baxter_ssh packages:
+    *Note*: replaces Rethink's baxter_common with a version that has parallel electric end effectors modeled
 
-   * xacro
-   * cmake_modules -b master
-   * control_toolbox -b indigo-devel
-   * realtime_tools -b indigo-devel
-   * ros_control -b all_dev_combined
-   * ros_controllers -b indigo_to_groovy_backport
-   * baxter_common -b master
-   * baxter_ssh -b indigo-devel
-   * control_msgs -b indigo-devel
+    ```
+    wstool merge --merge-replace -y https://raw.github.com/davetcoleman/baxter_ssh/indigo-devel/baxter_ssh/baxter_ss.hrosinstall
+    ```
 
-* Build & Source
+* Download the Baxter packages:
+
+    ```
+    wstool update
+    ```
+
+* Build
+
+    ```
+    cd ..
+    catkin_make
+    ```
 
 ## Bringup Baxter
 
@@ -66,7 +88,7 @@ This Baxter repository uses [ros_control](http://wiki.ros.org/ros_control) to se
    ```
    rosservice call /robot/controller_manager/switch_controller "{start_controllers: ['position_joint_mode_controller','left_position_trajectory_controller','right_position_trajectory_controller'], stop_controllers: ['velocity_joint_mode_controller','left_velocity_trajectory_controller','right_velocity_trajectory_controller'], strictness: 2}"
    ```
-   Plot position error of position-based trajectory controller 
+   Plot position error of position-based trajectory controller
    ```
    roslaunch baxter_control joint_position_left_trajectory_controller.launch
    roslaunch baxter_control joint_position_right_trajectory_controller.launch
@@ -76,7 +98,7 @@ This Baxter repository uses [ros_control](http://wiki.ros.org/ros_control) to se
    ```
    rosservice call /robot/controller_manager/switch_controller "{start_controllers: ['velocity_joint_mode_controller','left_velocity_trajectory_controller','right_velocity_trajectory_controller'], stop_controllers: ['position_joint_mode_controller','left_position_trajectory_controller','right_position_trajectory_controller'], strictness: 2}"
    ```
-   Plot *position* error of velocity-based trajectory controller 
+   Plot *position* error of velocity-based trajectory controller
    ```
    roslaunch baxter_control joint_velocity_left_trajectory_controller.launch
    roslaunch baxter_control joint_velocity_right_trajectory_controller.launch
@@ -107,11 +129,11 @@ Some helpful notes for setting up your Baxter to be more useful. Its suggested y
 
 ### Install emacs
 
-    wget SOME-MIRROR/emacs-24.3.tar.xz                                                                                                                                                                                                                                            
-    tar xvfJ emacs-24.3.tar.xz                                                                                                                                                                                                                                                    
-    cd emacs-24.3                                                                                                                                                                                                                                                                 
-    ./configure --with-gif=no                                                                                                                                                                                                                                                     
-    make                                                                                                                                                                                                                                                                          
+    wget SOME-MIRROR/emacs-24.3.tar.xz
+    tar xvfJ emacs-24.3.tar.xz
+    cd emacs-24.3
+    ./configure --with-gif=no
+    make
 
 Add to PATH:
 
@@ -132,7 +154,7 @@ Edit Makefile to say first three lines:
      ETC_DIR=~/etc
 
 Install - The script will complain about changing ownership of colordiffrc - ignore the error.
-    
+
      make install
 
 Add to PATH in .bashrc
@@ -160,4 +182,3 @@ BSD (New BSD License)
 ## Contributors
 
 Please help - see [Contribute](https://github.com/davetcoleman/baxter_cpp/blob/master/CONTRIBUTING.md) page.
-
