@@ -20,8 +20,15 @@
     <rosparam file="$(find baxter_control)/config/hardware_controllers.yaml" command="load"/>
 
     <!-- Load the default controllers -->
-    <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false"
+    <!--node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false"
 	  output="screen" ns="/robot" args="joint_state_controller
+					    velocity_joint_mode_controller
+					    right_velocity_trajectory_controller
+					    left_velocity_trajectory_controller
+					    " /-->
+
+    <node name="ros_control_controller_manager" pkg="controller_manager" type="controller_manager" respawn="false"
+	  output="screen" ns="/robot" args="spawn
 					    velocity_joint_mode_controller
 					    right_velocity_trajectory_controller
 					    left_velocity_trajectory_controller
