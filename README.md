@@ -47,7 +47,7 @@ A C++ version of the Baxter SDK that works along side the Rethink SDK. This is t
     *Note*: replaces Rethink's baxter_common with a version that has parallel electric end effectors modeled
 
     ```
-    wstool merge --merge-replace -y https://raw.github.com/davetcoleman/baxter_ssh/indigo-devel/baxter_ssh/baxter_ss.hrosinstall
+    wstool merge --merge-replace -y https://raw.github.com/davetcoleman/baxter_ssh/indigo-devel/baxter_ssh/baxter_ssh.rosinstall
     ```
 
 * Download the Baxter packages:
