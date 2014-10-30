@@ -36,12 +36,19 @@ import roslib
 roslib.load_manifest('baxter_scripts')
 import rospy
 
-import cv
 import cv_bridge
 
 import sensor_msgs.msg
 
-def send_image(path):
+def module_exists(module_name):
+    try:
+        __import__(module_name)
+    except ImportError:
+        return False
+    else:
+        return True
+
+def send_image(path, use_cv2):
     """
     Send the image located at the specified path to the head
     display on Baxter.
@@ -49,9 +56,16 @@ def send_image(path):
     @param path - path to the image file to load and send
     """
 
-    img = cv.LoadImage(path)
-    msg = cv_bridge.CvBridge().cv_to_imgmsg(img, encoding="bgr8")
-    pub = rospy.Publisher('/robot/xdisplay', sensor_msgs.msg.Image, latch=True)
+    if use_cv2:
+        import cv2
+        img = cv2.imread(path)
+        msg = cv_bridge.CvBridge().cv2_to_imgmsg(img, encoding="bgr8")
+        pub = rospy.Publisher('/robot/xdisplay', sensor_msgs.msg.Image, latch=True, queue_size=1)
+    else:
+        img = cv.LoadImage(path)
+        msg = cv_bridge.CvBridge().cv_to_imgmsg(img, encoding="bgr8")
+        pub = rospy.Publisher('/robot/xdisplay', sensor_msgs.msg.Image, latch=True)
+
     pub.publish(msg)
     # Even with the latch, we seem to need to wait a bit before exiting to
     # make sure that the message got sent.  Using a service may be a better
@@ -100,7 +114,13 @@ def main():
         rospy.loginfo("Waiting for %s seconds before publishing image to face" % (delay,))
         rospy.Rate(1/float(delay)).sleep()
 
-    send_image(path)
+    module_name = "cv2"
+    if module_exists(module_name):
+        use_cv2 = True
+    else:
+        use_cv2 = False
+
+    send_image(path, use_cv2)
     sys.exit(0)
 
 if __name__ == '__main__':
