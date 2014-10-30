@@ -9,7 +9,7 @@
 
     <!-- Display image on Baxter face -->
     <node name="face" pkg="baxter_scripts" type="xdisplay_image.py"
-	  args="--file=$(find baxter_control)/media/hal.jpg" />
+	  args="--file=$(find baxter_moveit_config)/media/hal.jpg" />
 
     <!-- Mute Baxter's sonars -->
     <!-- BROKEN? node name="baxter_mute_sonar" pkg="baxter_scripts" type="sonar_enable.py"
