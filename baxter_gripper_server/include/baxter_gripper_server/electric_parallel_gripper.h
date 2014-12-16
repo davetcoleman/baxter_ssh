@@ -62,7 +62,7 @@ static const double FINGER_JOINT_LOWER = -0.0125; //close
 static const double MSG_PULSE_SEC = 0.1;
 static const double WAIT_GRIPPER_CLOSE_SEC = 0.5;
 static const double WAIT_STATE_MSG_SEC = 1; // max time to wait for the gripper state to refresh
-static const double GRIPPER_MSG_RESEND = 100; // Number of times to re-send a msg to the end effects for assurance that it arrives
+static const double GRIPPER_MSG_RESEND = 1;//100; // Number of times to re-send a msg to the end effects for assurance that it arrives
 
 class ElectricParallelGripper
 {
