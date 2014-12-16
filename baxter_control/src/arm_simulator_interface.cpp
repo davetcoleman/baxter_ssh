@@ -199,15 +199,15 @@ void ArmSimulatorInterface::eeStateCallback(const baxter_core_msgs::EndEffectorC
       // arm_name_+"_gripper_l_finger_joint" = 7
       // arm_name_+"_gripper_r_finger_joint" = 8
 
-      if (msg->command == "grip")
+      if (msg->args == "{\"position\": 0}")
       {
         joint_position_[7] = -0.0125;
         joint_position_[8] = 0.0125;
       }
       else
       {
-        joint_position_[7] = 0.0095;
-        joint_position_[8] = -0.0095;
+        joint_position_[7] = 0.0094;
+        joint_position_[8] = -0.0094;
       }
 
       break;
