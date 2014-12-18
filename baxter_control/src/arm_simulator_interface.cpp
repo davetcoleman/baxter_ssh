@@ -199,15 +199,19 @@ void ArmSimulatorInterface::eeStateCallback(const baxter_core_msgs::EndEffectorC
       // arm_name_+"_gripper_l_finger_joint" = 7
       // arm_name_+"_gripper_r_finger_joint" = 8
 
+      static const double close_position = 0.03; //0.0125;
+      static const double open_position  = 0; //0.0094;
+
+      // Closed
       if (msg->args == "{\"position\": 0}")
       {
-        joint_position_[7] = -0.0125;
-        joint_position_[8] = 0.0125;
+        joint_position_[7] = -close_position;
+        joint_position_[8] = close_position;
       }
-      else
+      else // Open
       {
-        joint_position_[7] = 0.0094;
-        joint_position_[8] = -0.0094;
+        joint_position_[7] = open_position;
+        joint_position_[8] = -open_position;
       }
 
       break;
