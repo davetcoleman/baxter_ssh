@@ -1,3 +1,6 @@
+# SUPPORT FOR THIS PACKAGE HAS ENDED
+Sorry, too many things to maintain. Use at your own risk.
+
 Baxter SSH - Run Inside Baxter
 ======
 
